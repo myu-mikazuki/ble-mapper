@@ -25,7 +25,9 @@ setup(
     entry_points={
         'console_scripts': [
             'ble_detector = ble_mapper_ble.ble_node:main',
+            'ble_locator = ble_mapper_ble.ble_locator_node:main',
             'dummy_publisher = ble_mapper_ble.dummy_publisher:main',
+            'dummy_tf_publisher = ble_mapper_ble.dummy_tf_publisher:main',
         ],
     },
 )
