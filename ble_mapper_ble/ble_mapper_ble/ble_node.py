@@ -18,14 +18,20 @@ class BleNode(Node):
         self.get_logger().info('Start')
 
     def detection_callback(self, device, advertisement_data):
+        # if (device.name not in device_names);
+        if (not(device.name == 'Yuzupon')):
+            return
         msg = BleDetection()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = 'base_link'
+        msg.device_name = device.address
         msg.device_id = device.address
         msg.rssi = advertisement_data.rssi
+        msg.tx_power = float(advertisement_data.tx_power) if advertisement_data.tx_power is None else 0.0
+        msg.service_uuids = advertisement_data.service_uuids
         self.pub.publish(msg)
         self.get_logger().info(
-                f'検出: {device.address} RSSI={advertisement_data.rssi}')
+                f'検出: \"{device.name}\" address= {device.address} RSSI={advertisement_data.rssi}')
 
     async def scan_loop(self):
         async with BleakScanner(self.detection_callback):
