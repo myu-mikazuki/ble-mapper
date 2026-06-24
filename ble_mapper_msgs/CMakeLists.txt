@@ -13,6 +13,7 @@ find_package(geometry_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
     "msg/BleDetection.msg"
+    "msg/BleObservation.msg"
     DEPENDENCIES std_msgs geometry_msgs
 )
 
