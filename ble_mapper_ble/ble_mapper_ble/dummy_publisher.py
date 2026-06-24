@@ -1,7 +1,6 @@
 import rclpy
 from rclpy.node import Node
 from ble_mapper_msgs.msg import BleDetection
-from geometry_msgs.msg import Point
 import random
 
 
@@ -15,7 +14,6 @@ class DummyBleNode(Node):
         msg = BleDetection()
         msg.device_id = 'AA:BB:CC:DD:EE:FF'
         msg.rssi = random.randint(-90, -40)
-        msg.position = Point(x=1.0, y=2.0, z=0.0)
         msg.header.stamp = self.get_clock().now().to_msg()
         self.pub.publish(msg)
         self.get_logger().info(f'dummy 送信: RSSI={msg.rssi}')
